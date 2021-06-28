@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      height: 200px;
+    }
+
+    #menu>li {
+      float: left;
+      margin-left: 20px;
+      padding: 10px 30px;
+      border: 1px solid #000000;
+    }
+
+    ul:not(#menu) {
+      position: absolute;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <ul id="menu">
+    <li>水果</li>
+    <li>蔬菜</li>
+    <li>零食</li>
+    <li>饮料</li>
+  </ul>
+  <ul id="list1">
+    <li>猕猴桃</li>
+    <li>苹果</li>
+    <li>梨</li>
+  </ul>
+  <ul id="list2">
+    <li>白菜</li>
+    <li>土豆</li>
+    <li>地瓜</li>
+  </ul>
+  <ul id="list3">
+    <li>辣条</li>
+    <li>牛肉干</li>
+    <li>薯片</li>
+  </ul>
+  <ul id="list4">
+    <li>可乐</li>
+    <li>雪碧</li>
+    <li>果汁</li>
+  </ul>
+  <script>
+    var menu = document.getElementById("menu");
+    //将获取到的htmlCollection列表转成数组
+    var lis = Array.from(menu.getElementsByTagName("li"));
+    var uls = Array.from(document.getElementsByTagName("ul")).slice(1);
+    //监听浏览器的前进、回退按钮
+    window.onpopstate = function () {
+      changeList();
+    }
+    //给上面每个li添加点击事件
+    for (var i = 0; i < lis.length; i++) {
+      lis[i].onclick = clickHandler
+    }
+
+    function clickHandler() {
+      var index = lis.indexOf(this);
+      //将id数据传到新的页面，同时给当前的链接添加锚点标记
+      history.pushState({ id: "list" + (index + 1) }, "", "#list" + (index + 1));
+      changeList();
+    }
+
+    function changeList() {
+      for (var i = 0; i < uls.length; i++) {
+        //如果ul列表的id等于history中传过来的数据，则让对应的ul显示，否则让它隐藏
+        if (uls[i].id === history.state.id) {
+          uls[i].style.display = "block";
+        } else {
+          uls[i].style.display = "none";
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>

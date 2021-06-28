@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CORS(跨越资源共享)</title>
+</head>
+
+<body>
+  <section>
+    Bing Wallpaper
+  </section>
+  <button onclick="submit()">click</button>
+  <script>
+    const endpoint = "https://cn.bing.com/HPImageArchive.aspx";
+    const params = new URLSearchParams({
+      format: "js",
+      idx: "0",
+      n: "1",
+      nkt: "zh-CN",
+    });
+    const url = endpoint + "?" + params.toString()
+
+    submit = function () {
+      fetch(url).then(async function (response) {
+        console.log(response.ok);
+        const res = await response.json()
+
+        const baseUrl = "https://cn.bing.com";
+        const wallpaperUrl = baseUrl + res.url;
+        console.log(wallpaperUrl);
+        let bodyElement = document.getElementsByTagName("section")[0];
+        bodyElement.style.backgroundColor = "#666";
+        bodyElement.style.backgroundImage = `url(${wallpaperUrl})`;
+      })
+    }
+
+
+  </script>
+</body>
+
+</html>
