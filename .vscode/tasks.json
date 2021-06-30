@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "type": "typescript",
+      "tsconfig": "01_TypeScript/02_自动编译/tsconfig.json",
+      "option": "watch",
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      "group": "build",
+      "label": "tsc: watch - 01_TypeScript/02_自动编译/tsconfig.json"
+    }
+  ]
+}
