@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <textarea class="code" rows="10" cols="100" id="codeEditor" spellcheck="false"></textarea>
+  <button id="executeButton">execute</button>
+  <p class="err" id="errorMessage"></p>
+
+  <script src="./utils.js"></script>
+  <script id="codeSnippet" type="text/code-snippet">
+    console.log('hello')
+  </script>
+
+  <script>
+    let utils = new Utils('errorMessage');
+    let executeButton = document.getElementById('executeButton')
+
+    utils.loadCode('codeSnippet', 'codeEditor');
+
+    utils.executeCode('codeEditor');
+
+    executeButton.addEventListener('click', () => {
+      utils.executeCode('codeEditor');
+    })
+  </script>
+</body>
+
+</html>
