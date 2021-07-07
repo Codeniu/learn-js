@@ -50,6 +50,7 @@
   horse.run()
 
   // 父类型引用指向子类型的实例 ==> 多态
+  // 子类的示例赋值给类型为父类的变量
   const tom: Animal = new Horse('ho22')
   tom.run()
 
