@@ -1,6 +1,5 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -12,6 +11,9 @@ module.exports = {
   output: {
     path: path.resolve(rootDir, 'dist'),
     filename: 'bundle.[contenthash:8].js',
+    clean: {
+      keep: /asset\/image\//,
+    },
   },
   module: {
     rules: [
@@ -60,7 +62,6 @@ module.exports = {
       inject: 'body',
       scriptLoading: 'blocking',
     }),
-    new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
