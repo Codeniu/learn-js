@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A Pen by niu</title>
+
+
+</head>
+
+<body>
+  <h1>root</h1>
+  <div id="root"></div>
+  <h1>root1</h1>
+  <div id="root1"></div>
+
+
+  <script crossorigin src='https://unpkg.com/react/umd/react.development.js'></script>
+  <script crossorigin src='https://unpkg.com/react-dom/umd/react-dom.development.js'></script>
+  <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="./script.js"></script>
+
+  <script type="text/babel">
+    class Welcome extends React.Component {
+      render() {
+        return <h3>Hello, {this.props.name}</h3>
+      }
+    }
+
+    class App extends React.Component {
+      render() {
+        return (
+          <div>
+            <Welcome name={'Sara3'} />
+            <Welcome name={'Sara4'} />
+            <Welcome name={'Sara5'} />
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('root1'))
+  </script>
+
+</body>
+
+</html>
