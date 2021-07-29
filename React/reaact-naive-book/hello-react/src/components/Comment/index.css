@@ -6,3 +6,28 @@
   border: 1px solid #f1f1f1;
   padding: 20px;
 }
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-user{
+  color: #23b5c4;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.comment-delete{
+  display: inline-block;
+  width: 60px;
+  height: 32px;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  background-color: #c44a08d4;
+  text-align: center;
+  line-height: 32px;
+  color: #fff;
+  cursor: pointer;
+}
