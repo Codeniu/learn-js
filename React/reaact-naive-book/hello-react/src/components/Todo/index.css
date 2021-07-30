@@ -1,0 +1,55 @@
+.wrapper {
+  width: 500px;
+  margin: 10px auto;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #f1f1f1;
+  padding: 20px;
+}
+
+.todoInput-wrapper{
+  display: flex;
+  
+}
+.todoInput-wrapper input{
+  width: 100%;
+  border: 1px solid gray;
+  outline: none;
+  color: #7b7b7c;
+  font-size: large;
+}
+
+
+.todoInput-wrapper button {
+  width: 78px;
+  margin-left: 10px;
+  color: #fff;
+  background-color: #009688;
+  border: 1px solid #009688;
+  border-radius: 2px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.todoItem-wrapper{
+  padding: 5px;
+  
+}
+.todoItem-circle{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 4px solid #2594d0;
+  vertical-align: middle;
+  cursor:pointer;
+}
+
+.done{
+  background-color: #2594d0;
+}
+
+.todoItem-content{
+  vertical-align: middle;
+  margin-left: 4px;
+}
