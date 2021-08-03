@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import LayoutScreen from './screens/Layout'
-import ListScreen from './screens/List'
 import CommentApp from './components/Comment/CommentApp'
 import TodoApp from './components/Todo/TodoApp'
+import LayoutScreen from './screens/Layout'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <CommentApp />
-        <TodoApp />
+        <LayoutScreen>
+          <CommentApp />
+          <TodoApp />
+        </LayoutScreen>
       </div>
     )
   }
