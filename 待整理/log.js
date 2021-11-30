@@ -41,20 +41,6 @@ function commLog(args, logTag = 'log') {
     return
   }
   console[logTag](...convertToArray(args))
-  // switch (logTag) {
-  //     case 'log':
-  //         console.log(...convertToArray(args));
-  //         break;
-  //     case 'warn':
-  //         console.warn(...convertToArray(args));
-  //         break;
-  //     case 'error':
-  //         console.error(...convertToArray(args));
-  //         break;
-  //     case 'dir':
-  //         console.dir(...convertToArray(args));
-  //         break;
-  // }
 }
 Vue.use({
   // eslint-disable-next-line

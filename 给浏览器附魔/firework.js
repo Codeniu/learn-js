@@ -1,3 +1,7 @@
+/**
+ *  给页面放烟花
+ *
+ */
 javascript: !(function () {
   var cdom = document.createElement('canvas')
   cdom.id = 'myCanvas'
