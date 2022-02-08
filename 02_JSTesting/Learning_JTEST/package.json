@@ -1,0 +1,12 @@
+{
+    "type": "module",
+    "scripts": {
+        "test": "jest --watchAll"
+    },
+    "devDependencies": {
+        "jest": "^27.5.0"
+    },
+    "dependencies": {
+        "@babel/preset-env": "^7.16.11"
+    }
+}
