@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./NiuCard.js"></script>
+    <script src="./SmartCard.js"></script>
+</head>
+
+<body>
+    <h1>Web components Demo</h1>
+    <niu-card />
+    <p>
+        <niu-card />
+    </p>
+
+    <smart-card class="basic-card">
+        <div class="card-content">
+            <span class="card-title">Card Title</span>
+            <p>
+                I am a very simple card. I am good at containing small bits of information.
+                I am convenient because I require little markup to use effectively.
+            </p>
+        </div>
+        <div class="card-action">
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+        </div>
+    </smart-card>
+</body>
+
+</html>
