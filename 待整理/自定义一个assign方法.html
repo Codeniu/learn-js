@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = document.getElementById("app");
+    app.innerText = "123";
+
+    function copy(target) {
+        console.log("target", target);
+        if (target == null) {
+            throwError("err：Cannot convert undefined or null to object");
+        }
+        var target = new Object(target);
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            console.log(i, source)
+            for (var key in source) {
+                if (source.hasOwnProperty(key)) {
+                    //若当前属性为源对象自有属性，则拷贝至目标对象
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
+    }
+
+    let dog = { name: "teddy", age: "2" };
+    let type = { bark: "wowo", age: "3" };
+
+    let newDog = copy(dog, type, { pp: '123' });
+    console.log("copy 方法会返回一个指向目标对象的指针", newDog);
+    console.log("目标对象随之改变", dog);
+
+    // 改变这个对象,目标对象也会改变
+    newDog.name = "teddy2";
+    console.log("改变后的newDog", newDog);
+    console.log("改变后的dog", dog);
+
+
+    // Object.assign(dog, type);
+</script>
+
+</html>
