@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scrollHeight&clientHeight</title>
+    <style>
+      .target {
+        width: 100px;
+        height: 100px;
+        background-color: #ea5514;
+        border: 20px solid #2f88ed;
+        padding: 20px;
+        margin: 20px;
+        color: #fff;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <p>这是一个长宽均为100px 的正方形，border为20px，内外边距都为20px</p>
+    <div class="target">
+      <div>
+        clientHeight表示内部元素的高度，由height值与padding决定，不包含边框，外边距
+      </div>
+    </div>
+
+    <p>
+      scrollHeight
+      表示内容的高度，包含在视图外隐藏的部分，如果没有设置height的话，它的值等于clientHeight
+    </p>
+    <br />
+    <p>
+      scrollHeight:
+      <span id="scrollHeight"></span>
+    </p>
+
+    <p>
+      clientHeight:
+      <span id="clientHeight"></span>
+
+      clientWidth:
+      <span id="clientWidth"></span>
+    </p>
+  </body>
+  <script>
+    var el = document.getElementsByClassName('target')[0]
+
+    var elScroll = document.getElementById('scrollHeight')
+    var elClient = document.getElementById('clientHeight')
+    var elClientWidth = document.getElementById('clientWidth')
+    elScroll.innerHTML = el.scrollHeight
+    elClient.innerHTML = el.clientHeight
+    elClientWidth.innerHTML = el.clientWidth
+    console.log(el.scrollHeight)
+  </script>
+</html>

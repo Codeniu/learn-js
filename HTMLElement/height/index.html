@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Element之height</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+      #app {
+        display: flex;
+      }
+
+      .element {
+        width: 100px;
+        height: 100px;
+        background-color: #ea5514;
+        border: 20px solid #2f88ed;
+        padding: 20px;
+        margin: 20px;
+        color: #fff;
+        overflow: auto;
+      }
+
+      .code {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- element -->
+      <div class="element" ref="elementRef">code</div>
+      <!-- code -->
+      <div class="code">
+        <p>height:{{height}}</p>
+      </div>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        setup(props) {
+          const {
+            ref,
+            reactive,
+            toRefs,
+            computed,
+            onMounted,
+            getCurrentInstance,
+          } = Vue
+
+          const { proxy } = getCurrentInstance()
+          const elementRef = ref(null)
+
+          // 获取 Dom 元素
+          onMounted(() => {
+            console.log('1', elementRef.value)
+            console.log('2', proxy.elementRef)
+            elementRef.value.innerHTML = '123'
+            console.log('3', elementRef.value.style)
+          })
+
+          const height = computed(() => {
+            return elementRef.value
+          })
+
+          return {
+            height,
+            elementRef,
+          }
+        },
+      })
+      app.mount('#app')
+    </script>
+  </body>
+</html>
