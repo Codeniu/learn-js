@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>缩放解决方案</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f0dbae;
+      }
+      :root {
+        /* 设计稿的宽高，根据实际项目调整 */
+        --design_width: 1366px;
+        --design_height: 768px;
+      }
+      .screen-wrapper {
+        height: 100vh;
+        width: 100vw;
+        background-color: aqua;
+      }
+
+      .screen {
+        display: inline-block;
+        width: var(--design_width);
+        height: var(--design_height);
+        background: yellow;
+        transform-origin: 0 0;
+        position: absolute;
+        left: 50%;
+      }
+
+      .section {
+        height: 200px;
+        width: 200px;
+        outline: 1px solid #ddd;
+        line-height: 200px;
+        font-size: 40px;
+        text-align: center;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="screen-wrapper">
+      <div class="screen" id="screen">
+        <div class="section">A</div>
+        <div class="section">B</div>
+        <div class="section">C</div>
+        <div class="section">D</div>
+        <div class="section">E</div>
+      </div>
+    </div>
+
+    <p>
+      基于transform缩放的方案，优点是按设计稿设置元素大小，无需转换长度单位。缺点是放大展示时，echarts等图表会出现失真现象。为了避免图表失真，设计稿设计应按大屏尺寸设计，使其在屏幕中缩小展示。比如1920*1080和1366*768同为16:9的设计稿，应按1920*1080尺寸设计。
+    </p>
+
+    <script>
+      function setScale() {
+        let designWidth = 1366 //设计稿的宽度，根据实际项目调整
+        let designHeight = 768 //设计稿的高度，根据实际项目调整
+        let scale =
+          document.documentElement.clientWidth /
+            document.documentElement.clientHeight <
+          designWidth / designHeight
+            ? document.documentElement.clientWidth / designWidth
+            : document.documentElement.clientHeight / designHeight
+        document.querySelector(
+          '#screen'
+        ).style.transform = `scale(${scale}) translate(-50%)`
+      }
+      window.onresize = function () {
+        setScale()
+      }
+
+      setScale()
+    </script>
+  </body>
+</html>
