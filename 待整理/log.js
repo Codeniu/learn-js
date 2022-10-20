@@ -60,7 +60,7 @@ Vue.use({
     }
     // 打印对象
     Vue.prototype.$dir = function () {
-      commLog(arguments, 'dir')
+      commLog(arguments, 'dir1')
     }
   },
 })
