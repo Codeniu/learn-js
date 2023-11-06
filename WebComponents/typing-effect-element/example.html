@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>typing-effect demo</title>
-</head>
+  </head>
 
-<body>
-    <typing-effect data-lines='["Welcome to GitHub!", "Let’s begin the adventure","哈哈哈哈哈哈哈哈哈"]'>
-        <span data-target="typing-effect.content"> </span>
-        <span data-target="typing-effect.cursor">⭐</span>
+  <body>
+    <typing-effect
+      data-lines='["Welcome to GitHub!", "Let’s begin the adventure","哈哈哈哈哈哈哈哈哈"]'
+    >
+      <span data-target="typing-effect.content"> </span>
+      <span data-target="typing-effect.cursor">⭐</span>
+    </typing-effect>
+
+    <br />
+
+    <typing-effect
+      data-lines='["哈哈哈哈", "嘻sssssssssssssssssss嘻嘻","娃娃拉瓦拉拉拉"]'
+    >
+      <span data-target="typing-effect.content"> 下面是打字效果： </span>
+      <span data-target="typing-effect.cursor"> | </span>
     </typing-effect>
 
     <script type="module">
-        import 'https://unpkg.com/@github/typing-effect-element@latest/dist/index.js'
+      import 'https://unpkg.com/@github/typing-effect-element@latest/dist/index.js'
       //import '../dist/index.js'
     </script>
-</body>
-
+  </body>
 </html>

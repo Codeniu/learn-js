@@ -12,7 +12,7 @@ function saveCorpus(title) {
 
   let text = '';
 
-  for (let i = 1; i <= 1000; i++) {
+  for (let i = 1000; i <= 2000; i++) {
     text += `test${String(i).padStart(3, '0')}` + '\n'
   }
 

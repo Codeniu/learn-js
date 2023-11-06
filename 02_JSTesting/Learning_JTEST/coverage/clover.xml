@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1644288536828" clover="3.2.0">
-  <project timestamp="1644288536829" name="All files">
+<coverage generated="1699256332315" clover="3.2.0">
+  <project timestamp="1699256332316" name="All files">
     <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2" elements="9" coveredelements="9" complexity="0" loc="3" ncloc="3" packages="1" files="1" classes="1"/>
-    <file name="trimSpace.js" path="C:\Users\Administrator\Desktop\JS\02_JSTesting\Learning_JTEST\src\trimSpace.js">
+    <file name="trimSpace.js" path="E:\TL\JS\02_JSTesting\Learning_JTEST\src\trimSpace.js">
       <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="2" type="cond" truecount="2" falsecount="0"/>

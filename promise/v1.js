@@ -23,8 +23,6 @@ class Promise {
         this.status = 'rejected'
         this.onRejectedCallbacks.forEach(fn => fn())
       }
-
-      
     }
     try {
       //执行时可能会发生异常
@@ -34,3 +32,5 @@ class Promise {
     }
   }
 }
+
+export default Promise

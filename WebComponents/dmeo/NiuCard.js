@@ -8,7 +8,7 @@ template.innerHTML = `
         }
     </style>
     <div class="card">
-        this is Web component Demo
+        niu CARD CODENIU
     </div>
 `
 
