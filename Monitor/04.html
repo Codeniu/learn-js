@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    const startTime = performance.now();
+
+    console.log('startTime: ', startTime);
+
+    whiteScreen = new Date() - performance.timing.navigationStart
+    console.log('whiteScreen1: ', whiteScreen);
+
+
+
+    whiteScreen = performance.timing.domLoading - performance.timing.navigationStart
+    console.log('whiteScreen2: ', whiteScreen);
+  </script>
+
+</head>
+
+<body>
+  <script>
+    window.addEventListener('load', function () {
+      const firstPaintTime = performance.now();
+      const blankScreenTime = firstPaintTime - startTime;
+      console.log('页面白屏时间: ' + blankScreenTime + ' 毫秒');
+
+    });
+
+
+
+  </script>
+  <div>
+    <h1>页面白屏时间</h1>
+    <p>
+      页面白屏时间是指从浏览器接收到页面内容到浏览器开始渲染页面所花费的时间。
+      白屏时间越长，用户体验越差，影响用户对页面的第一印象。
+    </p>
+    <p>
+      白屏时间的计算方法：
+    </p>
+    <p>
+      白屏时间 = (用户打开页面到页面上第一个DOM元素渲染完成的时间)
+    </p>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端监控</title>
+  </head>
+  <body>
+    <img src="/asd.png" alt="" />
+
+    <button type="button" id="btn">
+      click
+
+      <a href="#">123</a>
+    </button>
+
+    <script>
+      const btnEl = document.querySelector('#btn')
+      btnEl.addEventListener('click', e => {
+        trackWebclick(e.target, {
+          test: 'hello',
+        })
+      })
+    </script>
+
+    <script>
+      // 页面信息
+      const GetPageInfo = () => {
+        const url = window.location.href
+        const hash = window.location.hash
+        const referrer = document.referrer
+        const title = document.title
+        const query = window.location.search
+        const host = window.location.host
+        const pathname = window.location.pathname
+        const protocol = window.location.protocol.split(':')[0]
+        const port = window.location.port
+        return {
+          url,
+          host,
+          pathname,
+          protocol,
+          port,
+          hash,
+          referrer,
+          title,
+          query: query.substring(1),
+        }
+      }
+
+      // UUID
+      const UUIDGeneratorBrowser = () =>
+        ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+          (
+            c ^
+            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+          ).toString(16)
+        )
+
+      // summary data
+      const info = {
+        version: '1.0.0',
+        distinct_id: UUIDGeneratorBrowser(),
+        event: '',
+        env: navigator.userAgent,
+        time: new Date().getTime(),
+        ...GetPageInfo(),
+      }
+
+      const { version, distinct_id, event } = info
+      const data = {
+        version,
+        distinct_id,
+        event,
+        properties: {
+          ...Object.keys(info).reduce((pre, cur) => {
+            if (['version', 'distinct_id', 'event'].indexOf(cur) === -1) {
+              pre[cur] = info[cur]
+            }
+            return pre
+          }, {}),
+        },
+      }
+
+      console.log(data)
+
+      const trackPage = str => {
+        console.log(str)
+      }
+
+      const setPageLoadListener = () => {
+        document.addEventListener('DOMContentLoaded', function () {
+          trackPage('pageload')
+        })
+
+        // 监听页面跳转
+        window.addEventListener('hashchange', function () {
+          trackPage('hashchange')
+        })
+
+        // 监听页面前进后退
+        window.addEventListener('popstate', function () {
+          trackPage('pageview')
+        })
+
+        let historyPush = window.history.pushState
+        window.history.pushState = function () {
+          historyPush.apply(window.history, arguments)
+          trackPage('pageview')
+        }
+      }
+
+      const checkValidTagName = tagName => {
+        const validTagNames = ['a', 'button']
+        return validTagNames.indexOf(tagName.toLocaleLowerCase()) > -1
+      }
+
+      // 以body或者其下第一个容器元素为开始节点，生成selector path
+      const getElementPathName = el => {
+        if (el.id && el.id !== '') {
+          return `#${el.id}`
+        } else {
+          const parentElement = el.parentElement
+          const childIndex = Array.prototype.indexOf.call(
+            parentElement.children,
+            el
+          )
+          if (
+            el.parentNode &&
+            parentElement.tagName.toLocaleLowerCase() === 'body'
+          ) {
+            return `body > ${el.tagName.toLocaleLowerCase()}:nth-child(${
+              childIndex + 1
+            })`
+          } else {
+            return ` > ${el.tagName.toLocaleLowerCase()}:nth-child(${
+              childIndex + 1
+            })`
+          }
+        }
+      }
+
+      // 判断是否是有效自动上报节点 同时生成上报数据
+      const getClickElementInfo = ev => {
+        // 重置点击数据
+        let validClick = false
+        this.clickData = {}
+        const pathEls = ev.composedPath()
+        let elementInPath = []
+        let hasValidElement = false
+        let targetElement
+        // 从下往上查找有效的点击元素，a标签或者button内可能包含其他元素
+        while (pathEls.length > 0) {
+          const el = pathEls.shift()
+          if (el.tagName && checkValidTagName(el.tagName)) {
+            hasValidElement = true
+            targetElement = el
+            break
+          }
+        }
+        elementInPath = pathEls.reverse().slice(4)
+        elementInPath.push(targetElement)
+        if (elementInPath.length > 0 && hasValidElement) {
+          const target = elementInPath[elementInPath.length - 1]
+          const tagName = target.tagName.toLowerCase()
+          const className = target.className
+          const content = target.innerText
+          // selector拼接 保证querySelector能正确定位元素
+          const selector = elementInPath
+            .map(item => getElementPathName(item))
+            .join('')
+          this.clickData = {
+            event: 'click',
+            action: 'click',
+            selector,
+            content,
+            className,
+            tagName,
+          }
+          if (tagName === 'a') {
+            const href = target.getAttribute('href')
+            this.clickData.targetUrl = href
+          }
+          validClick = true
+        }
+        return validClick
+      }
+
+      // 监听方法 全局自动上报
+      document.addEventListener('click', e => {
+        getClickElementInfo(e) && trackClick()
+      })
+
+      function trackClick() {
+        console.log('clickData', clickData)
+        console.log('data', data)
+      }
+
+      // 手动上报方法
+
+      function getPathElemsByEl(el) {
+        let elementInPath = []
+        while (el.parentNode && el.tagName.toLocaleLowerCase() !== 'body') {
+          elementInPath.push(el)
+          el = el.parentNode
+        }
+        return elementInPath.reverse()
+      }
+
+      function trackWebclick(el, props) {
+        const target = el
+        const elementInPath = getPathElemsByEl(target)
+        const tagName = target.tagName.toLowerCase()
+        const className = target.className
+        const content = target.innerText
+        const selector = elementInPath
+          .map(item => getElementPathName(item))
+          .join('')
+        this.clickData = {
+          event: 'click',
+          action: 'click',
+          selector,
+          content,
+          className,
+          tagName,
+          ...props,
+        }
+        if (tagName === 'a') {
+          const href = target.getAttribute('href')
+          this.clickData.targetUrl = href
+        }
+        trackClick()
+      }
+    </script>
+  </body>
+</html>
